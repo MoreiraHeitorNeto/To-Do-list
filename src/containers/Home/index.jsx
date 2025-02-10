@@ -33,7 +33,8 @@ const ToDoApp = () => {
     const newTasks = tasks.map((task, i) => {
       if (i === index) {
         if (!task.completed) {
-          setCompletedTasks([...completedTasks, task]);
+          const completionTime = new Date().toLocaleString();
+          setCompletedTasks([...completedTasks, { ...task, completedAt: completionTime }]);
         }
         return { ...task, completed: !task.completed };
       }
@@ -94,7 +95,7 @@ const ToDoApp = () => {
       <ul style={{ listStyle: "none", padding: 0, color: "gray" }}>
         {completedTasks.map((task, index) => (
           <li key={index} style={{ padding: "5px", borderBottom: "1px solid #ccc" }}>
-            {task.text}
+            {task.text} - <small>{task.completedAt}</small>
           </li>
         ))}
       </ul>
